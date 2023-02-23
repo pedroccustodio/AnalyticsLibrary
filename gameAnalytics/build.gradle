@@ -1,7 +1,10 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
 }
+
+apply plugin: 'kotlin-android-extensions'
 
 android {
     namespace 'com.example.gameanalytics'
@@ -44,18 +47,18 @@ dependencies {
     // Used for the calls to addCallback() in the snippets on this page.
     implementation("com.google.guava:guava:28.0-android")
 
-    afterEvaluate {
-        publishing {
-            publications {
-                release(MavenPublication) {
-                    from components.release
+}
 
-                    groupId = 'com.github.pedroccustodio'
-                    artifactId = 'analytics-library'
-                    version = '1.0'
-                }
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.github.pedroccustodio'
+                artifactId = 'analytics-library'
+                version = '1.0'
             }
         }
     }
-
 }
